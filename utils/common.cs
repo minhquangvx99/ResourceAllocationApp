@@ -49,15 +49,11 @@ namespace ResourceAllocationApp.utils
             return -1;
         }
 
-        public void printPop(List<Tuple<individual, Tuple<List<double>, List<double>>>> populationInfo, int numResourceHuman, int numResourceMachine)
+        public string printPop(List<Tuple<individual, Tuple<List<double>, List<double>>>> populationInfo, int numResourceHuman, int numResourceMachine)
         {
+            string result;
             int x = populationInfo.Count;
-            //print(populationInfo)
-            //print("\n Done \n Population include {} element ".format(x))
-            Console.Write(populationInfo);
-            Console.Write("\n Done \n Population include ");
-            Console.Write(x);
-            Console.Write(" element");
+            result = "\r\nPopulation include " + x.ToString() + " element";
             int ind = 0;
             int numObj = 3;
             List<double> s = new List<double>();
@@ -69,57 +65,36 @@ namespace ResourceAllocationApp.utils
                 individual ele = populationInfo[i].Item1;
                 List<double> ob_constr = populationInfo[i].Item2.Item1;
                 ind += 1;
-                List<int> machine = new List<int>();
-                List<int> human = new List<int>();
                 if (ind > 0)
                 {
-                    //int temp;
-                    //print("\n solution {}. \n".format(ind))
-                    Console.Write("\nsolution ");
-                    Console.Write(ind);
-
-                    for (int j = 0; j < ele.t_human_assign.Count; j++)
+                    result += "\r\nsolution " + ind.ToString();
+                    result += "\r\nraw_m: [";
+                    for (int m = 0; m < ele.t_machine_assign.Count; m++)
                     {
-                        machine.Add(ele.t_machine_assign[j]);
-                        human.Add(ele.t_human_assign[j]);
-                        /*
-                        temp = ele.t_machine_assign[j];
-                        for (int k = 0; temp > 0; k++)
+                        if (m == ele.t_machine_assign.Count - 1)
                         {
-                            int[] machine_j = (int[])machine[j];
-                            machine_j[k] = (temp % 2);
-                            machine[j] = machine_j;
-                            temp = temp / 2;
+                            result += ele.t_machine_assign[m].ToString();
                         }
-                        //machine.append( "({})".format("{0:b}".format(ele.t_machine_assign[i]).zfill(numResourceMachine)))
-                        temp = ele.t_human_assign[j];
-                        for (int k = 0; temp > 0; k++)
+                        else
                         {
-                            int[] human_j = (int[])human[j];
-                            human_j[k] = (temp % 2);
-                            human[j] = human_j;
-                            temp = temp / 2;
+                            result += ele.t_machine_assign[m].ToString() + ", ";
                         }
-                        //human.append("({})".format("{0:b}".format(ele.t_human_assign[i]).zfill(numResourceHuman)))
-                        */
+
                     }
-                    /*
-                    print("t_m_assign  : {}".format(machine))
-    
-                    print("t_h_assign  : {}".format(human))
-    
-                    print("raw_m  :  {}".format(ele.t_machine_assign))
-    
-                    print("raw_h  :  {}".format(ele.t_human_assign))
-                    */
-                    Console.Write("\nt_m_assign: ");
-                    Console.Write(machine);
-                    Console.Write("\nt_h_assign: ");
-                    Console.Write(human);
-                    Console.Write("\nraw_m: ");
-                    Console.Write(ele.t_machine_assign);
-                    Console.Write("\nraw_h: ");
-                    Console.Write(ele.t_human_assign);
+                    result += "]";
+                    result += "\r\nraw_h: [";
+                    for (int h = 0; h < ele.t_human_assign.Count; h++)
+                    {
+                        if(h== ele.t_human_assign.Count - 1)
+                        {
+                            result += ele.t_human_assign[h].ToString() ;
+                        }
+                        else
+                        {
+                            result += ele.t_human_assign[h].ToString() + ", ";
+                        }
+                    }
+                    result += "]";
 
                 }
                 for (int j = 0; j < numObj; j++)
@@ -127,15 +102,21 @@ namespace ResourceAllocationApp.utils
                     s[j] += ob_constr[j];
                 }
             }
-            //print("\n Average values : [")
-            Console.WriteLine("\n Average values:[");
-            for (int i = 0; i < numObj; i++)
+            result = "\r\n]" + result;
+            for (int i = numObj-1; i >= 0; i--)
             {
                 s[i] = s[i]/x;
-                //print("{},".format(s[i]));
-                Console.WriteLine(s[i]);
+                if (i == 0)
+                {
+                    result = "\r\n" + s[i].ToString() + result;
+                }
+                else
+                {
+                    result = "," + "\r\n" + s[i].ToString() + result;
+                }
             }
-            Console.WriteLine("]");
+            result = "Average values:[" + result;
+            return result;
         }
     }
 }

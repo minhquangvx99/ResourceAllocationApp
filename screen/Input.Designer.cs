@@ -30,13 +30,12 @@ namespace ResourceAllocationApp.screen
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.progressPercentage = new System.Windows.Forms.Label();
-            this.progress = new System.Windows.Forms.ProgressBar();
             this.btnImportData = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnOpenDataFile = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.textResult = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,8 +44,7 @@ namespace ResourceAllocationApp.screen
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.panel1.BackgroundImage = global::ResourceAllocationApp.Properties.Resources.icon_RA;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.progressPercentage);
-            this.panel1.Controls.Add(this.progress);
+            this.panel1.Controls.Add(this.textResult);
             this.panel1.Controls.Add(this.btnImportData);
             this.panel1.Controls.Add(this.btnExit);
             this.panel1.Controls.Add(this.btnOpenDataFile);
@@ -57,23 +55,6 @@ namespace ResourceAllocationApp.screen
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 496);
             this.panel1.TabIndex = 4;
-            // 
-            // progressPercentage
-            // 
-            this.progressPercentage.AutoSize = true;
-            this.progressPercentage.Location = new System.Drawing.Point(386, 437);
-            this.progressPercentage.Name = "progressPercentage";
-            this.progressPercentage.Size = new System.Drawing.Size(47, 20);
-            this.progressPercentage.TabIndex = 7;
-            this.progressPercentage.Text = "% %";
-            // 
-            // progress
-            // 
-            this.progress.BackColor = System.Drawing.Color.White;
-            this.progress.Location = new System.Drawing.Point(206, 460);
-            this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(381, 23);
-            this.progress.TabIndex = 6;
             // 
             // btnImportData
             // 
@@ -132,6 +113,15 @@ namespace ResourceAllocationApp.screen
             this.label1.TabIndex = 1;
             this.label1.Text = "Data for problem : Optimize assignment and schedule";
             // 
+            // textResult
+            // 
+            this.textResult.Location = new System.Drawing.Point(180, 51);
+            this.textResult.Multiline = true;
+            this.textResult.Name = "textResult";
+            this.textResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textResult.Size = new System.Drawing.Size(593, 409);
+            this.textResult.TabIndex = 6;
+            // 
             // Input
             // 
             this.ClientSize = new System.Drawing.Size(800, 496);
@@ -153,8 +143,7 @@ namespace ResourceAllocationApp.screen
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnImportData;
-        private System.Windows.Forms.Label progressPercentage;
-        private System.Windows.Forms.ProgressBar progress;
+        private System.Windows.Forms.TextBox textResult;
     }
 }
 

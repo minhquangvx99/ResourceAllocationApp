@@ -35,11 +35,11 @@ namespace ResourceAllocationApp.screen
             nsga ng = new nsga();
             common cm = new common();
             random_Q r = new random_Q();
-            pop.randomize(para,r);
+            pop.randomize(para, r);
             population pp = new population();
             List<individual> pop_init = pp.make_pop(para, r);
             List<Tuple<individual, Tuple<List<double>, List<double>>>> best_allocate = ng.run(para, pop_init, r);
-            cm.printPop(best_allocate, para.humans, para.machines);
+            textResult.Text= cm.printPop(best_allocate, para.humans, para.machines);
         }
         private void btnImportData_Click(object sender, EventArgs e)
         {
