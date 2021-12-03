@@ -96,21 +96,25 @@ namespace ResourceAllocationApp.screen
             // 
             // textNumberOfMachines
             // 
+            this.textNumberOfMachines.Enabled = false;
             this.textNumberOfMachines.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.textNumberOfMachines.Location = new System.Drawing.Point(397, 189);
             this.textNumberOfMachines.Multiline = true;
             this.textNumberOfMachines.Name = "textNumberOfMachines";
             this.textNumberOfMachines.Size = new System.Drawing.Size(377, 39);
             this.textNumberOfMachines.TabIndex = 4;
+            this.textNumberOfMachines.Text = "5";
             // 
             // textNumberOfSkills
             // 
+            this.textNumberOfSkills.Enabled = false;
             this.textNumberOfSkills.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.textNumberOfSkills.Location = new System.Drawing.Point(394, 337);
             this.textNumberOfSkills.Multiline = true;
             this.textNumberOfSkills.Name = "textNumberOfSkills";
             this.textNumberOfSkills.Size = new System.Drawing.Size(380, 39);
             this.textNumberOfSkills.TabIndex = 5;
+            this.textNumberOfSkills.Text = "5";
             // 
             // textConsumingOfMachines
             // 
@@ -132,12 +136,14 @@ namespace ResourceAllocationApp.screen
             // 
             // textNumberOfMachineType
             // 
+            this.textNumberOfMachineType.Enabled = false;
             this.textNumberOfMachineType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.textNumberOfMachineType.Location = new System.Drawing.Point(394, 389);
             this.textNumberOfMachineType.Multiline = true;
             this.textNumberOfMachineType.Name = "textNumberOfMachineType";
             this.textNumberOfMachineType.Size = new System.Drawing.Size(380, 39);
             this.textNumberOfMachineType.TabIndex = 8;
+            this.textNumberOfMachineType.Text = "5";
             // 
             // label2
             // 
@@ -189,7 +195,7 @@ namespace ResourceAllocationApp.screen
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(355, 39);
             this.label6.TabIndex = 19;
-            this.label6.Text = "the consuming of machines:";
+            this.label6.Text = "the consuming of machines:                                          VD: 20 20 80 5 100";
             // 
             // label7
             // 
@@ -199,7 +205,7 @@ namespace ResourceAllocationApp.screen
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(355, 39);
             this.label7.TabIndex = 20;
-            this.label7.Text = "the productivity ratio of machines:";
+            this.label7.Text = "the productivity ratio of machines:                                VD: 0.9 0.9 0.8 0.5 0.9";
             // 
             // label8
             // 
@@ -279,9 +285,9 @@ namespace ResourceAllocationApp.screen
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(394, 89);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(75, 39);
+            this.label11.Size = new System.Drawing.Size(124, 39);
             this.label11.TabIndex = 34;
-            this.label11.Text = "officers salary:";
+            this.label11.Text = "officers salary: VD: 120";
             // 
             // label12
             // 
@@ -289,26 +295,26 @@ namespace ResourceAllocationApp.screen
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(394, 141);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(75, 39);
+            this.label12.Size = new System.Drawing.Size(124, 39);
             this.label12.TabIndex = 35;
-            this.label12.Text = "workers salary:";
+            this.label12.Text = "workers salary: VD: 40";
             // 
             // textOfficersSalary
             // 
             this.textOfficersSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textOfficersSalary.Location = new System.Drawing.Point(475, 89);
+            this.textOfficersSalary.Location = new System.Drawing.Point(524, 89);
             this.textOfficersSalary.Multiline = true;
             this.textOfficersSalary.Name = "textOfficersSalary";
-            this.textOfficersSalary.Size = new System.Drawing.Size(299, 39);
+            this.textOfficersSalary.Size = new System.Drawing.Size(250, 39);
             this.textOfficersSalary.TabIndex = 36;
             // 
             // textWorkersSalary
             // 
             this.textWorkersSalary.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textWorkersSalary.Location = new System.Drawing.Point(475, 141);
+            this.textWorkersSalary.Location = new System.Drawing.Point(524, 141);
             this.textWorkersSalary.Multiline = true;
             this.textWorkersSalary.Name = "textWorkersSalary";
-            this.textWorkersSalary.Size = new System.Drawing.Size(299, 39);
+            this.textWorkersSalary.Size = new System.Drawing.Size(250, 39);
             this.textWorkersSalary.TabIndex = 37;
             // 
             // ImportData
