@@ -30,12 +30,12 @@ namespace ResourceAllocationApp.screen
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textResult = new System.Windows.Forms.TextBox();
             this.btnImportData = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnOpenDataFile = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textResult = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,9 +56,18 @@ namespace ResourceAllocationApp.screen
             this.panel1.Size = new System.Drawing.Size(800, 496);
             this.panel1.TabIndex = 4;
             // 
+            // textResult
+            // 
+            this.textResult.Location = new System.Drawing.Point(180, 51);
+            this.textResult.Multiline = true;
+            this.textResult.Name = "textResult";
+            this.textResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textResult.Size = new System.Drawing.Size(593, 409);
+            this.textResult.TabIndex = 6;
+            // 
             // btnImportData
             // 
-            this.btnImportData.BackColor = System.Drawing.Color.Aqua;
+            this.btnImportData.BackColor = System.Drawing.Color.Blue;
             this.btnImportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImportData.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnImportData.Location = new System.Drawing.Point(11, 119);
@@ -81,7 +90,7 @@ namespace ResourceAllocationApp.screen
             // 
             // btnOpenDataFile
             // 
-            this.btnOpenDataFile.BackColor = System.Drawing.Color.Aqua;
+            this.btnOpenDataFile.BackColor = System.Drawing.Color.Blue;
             this.btnOpenDataFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenDataFile.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnOpenDataFile.Location = new System.Drawing.Point(11, 51);
@@ -112,15 +121,6 @@ namespace ResourceAllocationApp.screen
             this.label1.Size = new System.Drawing.Size(526, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "Data for problem : Optimize assignment and schedule";
-            // 
-            // textResult
-            // 
-            this.textResult.Location = new System.Drawing.Point(180, 51);
-            this.textResult.Multiline = true;
-            this.textResult.Name = "textResult";
-            this.textResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textResult.Size = new System.Drawing.Size(593, 409);
-            this.textResult.TabIndex = 6;
             // 
             // Input
             // 
