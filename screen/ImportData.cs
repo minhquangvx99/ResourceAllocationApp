@@ -24,12 +24,15 @@ namespace ResourceAllocationApp.screen
 
         private void btnSaveDataFile_Click(object sender, EventArgs e)
         {
-            var filename = textFileName.Text;
+            var filename = textFileName.Text.Trim();
             var directory_mydoc = "D:/Tài liệu môn học kì 20211/ĐATN/ResourceAllocationApp/data";
             var fullpath = Path.Combine(directory_mydoc, filename);
             random_Q r = new random_Q();
-
-            if (File.Exists(fullpath))
+            if (filename == "") {
+                //Chua nhap filename
+                MessageBox.Show("Vui lòng nhập FileName. ");
+            }
+            else if (File.Exists(fullpath))
             {
                 // File đã tồn tại
                 MessageBox.Show("FileName đã tồn tại, vui lòng nhập FileName khác. ");
