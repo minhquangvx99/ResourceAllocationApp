@@ -146,10 +146,12 @@ namespace ResourceAllocationApp.screen
                     + "\n-number of human resources:\n" + human_resource.ToString() + "\n-human salary:\n" + human_salary
                     + "\n-number of machine resources:\n" + textNumberOfMachines.Text + "\n-consuming of machine:\n" + textConsumingOfMachines.Text
                     + "\n-productivy of machine:\n" + textProductivyOfMachines.Text + "\n-number of skills:\n" + textNumberOfSkills.Text
-                    + "\n-number of machine type\n" + textNumberOfMachineType.Text + "\n-task duration, 1D array len= "+num_tasks.ToString()
+                    + "\n-number of machine type\n" + textNumberOfMachineType.Text + "\n-task duration, 1D array len= "+ num_tasks.ToString()
                     +"\n" + task_durations_str + "\n-dependency relationship : D = (t_i,t_j)\n-size D:\n" + sizeD.ToString() +"\n" + D 
-                    + "-TREQ matrix: size "+ num_tasks.ToString() +"x" +num_skills.ToString()+"\n" + matrixTREQ + "-LEXP matrix:\n" 
-                    + matrixLEXP + "-MREQ matrix:\n" + matrixMREQ + "-MEXP matrix:\n" +matrixMEXP;
+                    + "-TREQ matrix: size "+ num_tasks.ToString() +"x" +num_skills.ToString()+"\n" + matrixTREQ + "-LEXP matrix: size " 
+                    + human_resource.ToString() + "x" + num_skills.ToString() + "\n" + matrixLEXP + "-MREQ matrix: size " + num_tasks.ToString() + "x" 
+                    + textNumberOfMachines.Text + "\n" + matrixMREQ + "-MEXP matrix: size " + human_resource.ToString() + "x" 
+                    + textNumberOfMachines.Text + "\n" + matrixMEXP;
                 File.WriteAllText(fullpath, content);
                 this.Hide();
                 Input f = new Input();

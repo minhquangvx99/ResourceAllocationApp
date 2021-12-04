@@ -68,6 +68,44 @@ namespace ResourceAllocationApp.utils
                 if (ind > 0)
                 {
                     result += "\r\nsolution " + ind.ToString();
+                    result += "\r\nt_machine_assign: [";
+                    for (int m = 0; m < ele.t_machine_assign.Count; m++)
+                    {
+                        string temp = Convert.ToString(ele.t_machine_assign[m],2);
+                        for(int k=temp.Length;k<numResourceMachine;k++)
+                        {
+                            temp = "0" + temp;
+                        }
+                        if (m == ele.t_machine_assign.Count - 1)
+                        {
+                            result += temp;
+                        }
+                        else
+                        {
+                            result += temp + ", ";
+                        }
+
+                    }
+                    result += "]";
+                    result += "\r\nt_human_assign: [";
+                    for (int h = 0; h < ele.t_human_assign.Count; h++)
+                    {
+                        string temp = Convert.ToString(ele.t_human_assign[h], 2);
+                        for (int k = temp.Length; k < numResourceHuman; k++)
+                        {
+                            temp = "0" + temp;
+                        }
+                        if (h == ele.t_human_assign.Count - 1)
+                        {
+                            result += temp;
+                        }
+                        else
+                        {
+                            result += temp+ ", ";
+                        }
+                    }
+                    result += "]";
+
                     result += "\r\nraw_m: [";
                     for (int m = 0; m < ele.t_machine_assign.Count; m++)
                     {
