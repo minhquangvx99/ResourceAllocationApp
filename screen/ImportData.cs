@@ -25,8 +25,10 @@ namespace ResourceAllocationApp.screen
         private void btnSaveDataFile_Click(object sender, EventArgs e)
         {
             var filename = textFileName.Text.Trim();
-            var directory_mydoc = "D:/Tài liệu môn học kì 20211/ĐATN/ResourceAllocationApp/data";
-            var fullpath = Path.Combine(directory_mydoc, filename);
+            string projectDirectory = Directory.GetParent("ResourceAllocationApp").Parent.FullName;
+            string path = projectDirectory.Remove(projectDirectory.Count() - 4, 4) +"/data";
+            Console.WriteLine(path);
+            var fullpath = Path.Combine(path, filename);
             random_Q r = new random_Q();
             if (filename == "") {
                 //Chua nhap filename

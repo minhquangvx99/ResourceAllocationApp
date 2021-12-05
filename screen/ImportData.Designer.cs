@@ -195,7 +195,8 @@ namespace ResourceAllocationApp.screen
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(355, 39);
             this.label6.TabIndex = 19;
-            this.label6.Text = "the consuming of machines:                                          VD: 20 20 80 5 100";
+            this.label6.Text = "the consuming of machines:                                          VD: 20 20 80 " +
+    "5 100";
             // 
             // label7
             // 
@@ -205,7 +206,8 @@ namespace ResourceAllocationApp.screen
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(355, 39);
             this.label7.TabIndex = 20;
-            this.label7.Text = "the productivity ratio of machines:                                VD: 0.9 0.9 0.8 0.5 0.9";
+            this.label7.Text = "the productivity ratio of machines:                                VD: 0.9 0.9 0." +
+    "8 0.5 0.9";
             // 
             // label8
             // 
@@ -273,7 +275,7 @@ namespace ResourceAllocationApp.screen
             // 
             this.label10.BackColor = System.Drawing.Color.Cyan;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(394, 8);
+            this.label10.Location = new System.Drawing.Point(315, 8);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(146, 25);
             this.label10.TabIndex = 33;
