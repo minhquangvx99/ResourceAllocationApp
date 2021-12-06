@@ -16,9 +16,9 @@ namespace ResourceAllocationApp.algorithm
         {
             List<List<int>> prev_tasks = new List<List<int>>();
             prev_tasks = cm.get_prev_tasks(para);
-            int[] t_start = new int[para.tasks]; //t_start = np.empty(shape =params.tasks, dtype = int)
-            int[] t_finish = new int[para.tasks]; //t_finish = np.empty(shape =params.tasks, dtype = int)
-            int[] real_duration = new int[para.tasks]; //real_duration = np.empty(shape =params.tasks, dtype = int)
+            int[] t_start = new int[para.tasks];
+            int[] t_finish = new int[para.tasks];
+            int[] real_duration = new int[para.tasks];
             double project_finish = 0;
             for (int i = 0; i < para.tasks; i++)
             {
@@ -82,9 +82,9 @@ namespace ResourceAllocationApp.algorithm
         {
             List<List<int>> prev_tasks = new List<List<int>>();
             prev_tasks = cm.get_prev_tasks(para);
-            int[] t_start = new int[para.tasks]; //t_start = np.empty(shape =params.tasks, dtype = int)
-            int[] t_finish = new int[para.tasks]; //t_finish = np.empty(shape =params.tasks, dtype = int)
-            int[] real_duration = new int[para.tasks]; //real_duration = np.empty(shape =params.tasks, dtype = int)
+            int[] t_start = new int[para.tasks];
+            int[] t_finish = new int[para.tasks];
+            int[] real_duration = new int[para.tasks];
             for (int i = 0; i < para.tasks; i++)
             {
                 t_start[i] = 0;

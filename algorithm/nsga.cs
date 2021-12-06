@@ -433,10 +433,6 @@ namespace ResourceAllocationApp.algorithm
                 List<int> t_m_assign = child.Item2;
                 int n = t_h_assign.Count;
                 int pos = r.random_rd(0, n);
-                /*if(pos >= t_h_assign.Count)
-                {
-                    print("pos {}    {}".format(pos, len(t_h_assign)))
-                }*/
                 t_h_assign[pos] = r.random_rd(1, (1 << para.humans));
                 t_m_assign[pos] = r.random_rd(1, (1 << para.machines));
                 List<int> t_h_bit_assign = new List<int>();
