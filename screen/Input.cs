@@ -16,20 +16,44 @@ namespace ResourceAllocationApp.screen
 {
     public partial class Input : Form
     {
+        int indexSolution;
+        List<string[]> solution= new List<string[]>();
+        parameter para;
         public Input()
         {
             InitializeComponent();
-
+        }
+        private void showSolution()
+        {
+            labelSolution.Text = "Solution " + (indexSolution + 1).ToString();
+            string solution_i="";
+            string[] temp = solution[indexSolution];
+            for (int i=0; i < temp.Length; i++)
+            {
+                if (i < para.machines)
+                {
+                    solution_i += "Machine " + (i + 1).ToString() + ": " + temp[i] + "\r\n";
+                }
+                else
+                {
+                    solution_i += "Labor " + (i - para.machines + 1).ToString() + ": " + temp[i] + "\r\n";
+                }
+            }
+            textSolution.Text = solution_i;
+            
         }
         private void btnOpenDataFile_Click(object sender, EventArgs e)
         {
             string fullpath = "";
             OpenFileDialog dlg = new OpenFileDialog();
             textResult.Text = "";
+            textSolution.Text = "";
+            labelSolution.Text = "Solution";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                indexSolution = 0;
                 fullpath = dlg.FileName;
-                parameter para = new parameter();
+                para = new parameter();
                 para.process(fullpath);
                 individual pop = new individual();
                 nsga ng = new nsga();
@@ -39,7 +63,10 @@ namespace ResourceAllocationApp.screen
                 population pp = new population();
                 List<individual> pop_init = pp.make_pop(para, r);
                 List<Tuple<individual, Tuple<List<double>, List<double>>>> best_allocate = ng.run(para, pop_init, r);
-                textResult.Text = cm.printPop(best_allocate, para.humans, para.machines);
+                Tuple<string, List<string[]>> tuple = cm.printPop(best_allocate, para.humans, para.machines);
+                textResult.Text = tuple.Item1;
+                solution = tuple.Item2;
+                showSolution();
             }
             else
             {
@@ -53,6 +80,22 @@ namespace ResourceAllocationApp.screen
             this.Hide();
             ImportData f = new ImportData();
             f.ShowDialog();
+        }
+        private void btnFrontSolution_Click(object sender, EventArgs e)
+        {
+            if (indexSolution-1 >= 0)
+            {
+                indexSolution--;
+                showSolution();
+            }
+        }
+        private void btnNextSolution_Click(object sender, EventArgs e)
+        {
+            if (indexSolution+1 < solution.Count )
+            {
+                indexSolution++;
+                showSolution();
+            }
         }
         private void btnExit_Click(object sender, EventArgs e)
         {

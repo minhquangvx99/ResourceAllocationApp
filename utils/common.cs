@@ -49,7 +49,7 @@ namespace ResourceAllocationApp.utils
             return -1;
         }
 
-        public string printPop(List<Tuple<individual, Tuple<List<double>, List<double>>>> populationInfo, int numResourceHuman, int numResourceMachine)
+        public Tuple<string, List<string[]>> printPop(List<Tuple<individual, Tuple<List<double>, List<double>>>> populationInfo, int numResourceHuman, int numResourceMachine)
         {
             string result;
             int x = populationInfo.Count;
@@ -61,7 +61,13 @@ namespace ResourceAllocationApp.utils
             {
                 s.Add(0);
             }
+            List<string[]> solution = new List<string[]>();
             for (int i = 0; i < x; i++) {
+                string[] str = new string[numResourceMachine + numResourceHuman]; 
+                for(int q=0;q< numResourceMachine + numResourceHuman; q++)
+                {
+                    str[q] = "";
+                }
                 individual ele = populationInfo[i].Item1;
                 List<double> ob_constr = populationInfo[i].Item2.Item1;
                 ind += 1;
@@ -72,7 +78,14 @@ namespace ResourceAllocationApp.utils
                     for (int m = 0; m < ele.t_machine_assign.Count; m++)
                     {
                         string temp = Convert.ToString(ele.t_machine_assign[m],2);
-                        for(int k=temp.Length;k<numResourceMachine;k++)
+                        for (int p = 0; p < temp.Length; p++)
+                        {
+                            if (temp[p] == '1')
+                            {
+                                str[numResourceMachine - temp.Length] += (m + 1).ToString() + ", ";
+                            }
+                        }
+                        for (int k=temp.Length;k<numResourceMachine;k++)
                         {
                             temp = "0" + temp;
                         }
@@ -91,6 +104,13 @@ namespace ResourceAllocationApp.utils
                     for (int h = 0; h < ele.t_human_assign.Count; h++)
                     {
                         string temp = Convert.ToString(ele.t_human_assign[h], 2);
+                        for (int p = 0; p < temp.Length; p++)
+                        {
+                            if (temp[p] == '1')
+                            {
+                                str[numResourceHuman + numResourceMachine - temp.Length] += (h + 1).ToString() + ", ";
+                            }
+                        }
                         for (int k = temp.Length; k < numResourceHuman; k++)
                         {
                             temp = "0" + temp;
@@ -135,6 +155,7 @@ namespace ResourceAllocationApp.utils
                     result += "]";
 
                 }
+                solution.Add(str);
                 for (int j = 0; j < numObj; j++)
                 {
                     s[j] += ob_constr[j];
@@ -154,7 +175,8 @@ namespace ResourceAllocationApp.utils
                 }
             }
             result = "Average values:[" + result;
-            return result;
+            var tuple = new Tuple<string, List<string[]>>(result, solution);
+            return tuple;
         }
     }
 }

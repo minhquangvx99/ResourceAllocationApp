@@ -102,6 +102,8 @@
     <Content Include="data\data2.txt" />
     <Content Include="data\gen_data.txt" />
     <Content Include="data\gen_data2.txt" />
+    <None Include="Resources\icon next.png" />
+    <None Include="Resources\icon front.png" />
     <None Include="Resources\icon RA.png" />
     <None Include="Resources\icon_exit.png" />
   </ItemGroup>

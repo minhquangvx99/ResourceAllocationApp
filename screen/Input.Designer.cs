@@ -30,6 +30,10 @@ namespace ResourceAllocationApp.screen
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelSolution = new System.Windows.Forms.Label();
+            this.btnFrontSolution = new System.Windows.Forms.Button();
+            this.btnNextSolution = new System.Windows.Forms.Button();
+            this.textSolution = new System.Windows.Forms.TextBox();
             this.textResult = new System.Windows.Forms.TextBox();
             this.btnImportData = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
@@ -44,6 +48,10 @@ namespace ResourceAllocationApp.screen
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.panel1.BackgroundImage = global::ResourceAllocationApp.Properties.Resources.icon_RA;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.labelSolution);
+            this.panel1.Controls.Add(this.btnFrontSolution);
+            this.panel1.Controls.Add(this.btnNextSolution);
+            this.panel1.Controls.Add(this.textSolution);
             this.panel1.Controls.Add(this.textResult);
             this.panel1.Controls.Add(this.btnImportData);
             this.panel1.Controls.Add(this.btnExit);
@@ -56,13 +64,57 @@ namespace ResourceAllocationApp.screen
             this.panel1.Size = new System.Drawing.Size(800, 496);
             this.panel1.TabIndex = 4;
             // 
+            // labelSolution
+            // 
+            this.labelSolution.AutoSize = true;
+            this.labelSolution.Location = new System.Drawing.Point(176, 161);
+            this.labelSolution.Name = "labelSolution";
+            this.labelSolution.Size = new System.Drawing.Size(77, 20);
+            this.labelSolution.TabIndex = 10;
+            this.labelSolution.Text = "Solution";
+            // 
+            // btnFrontSolution
+            // 
+            this.btnFrontSolution.BackColor = System.Drawing.Color.Lime;
+            this.btnFrontSolution.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFrontSolution.ForeColor = System.Drawing.Color.Black;
+            this.btnFrontSolution.Location = new System.Drawing.Point(600, 416);
+            this.btnFrontSolution.Name = "btnFrontSolution";
+            this.btnFrontSolution.Size = new System.Drawing.Size(78, 50);
+            this.btnFrontSolution.TabIndex = 9;
+            this.btnFrontSolution.Text = "Front Solution";
+            this.btnFrontSolution.UseVisualStyleBackColor = false;
+            this.btnFrontSolution.Click += new System.EventHandler(this.btnFrontSolution_Click);
+            // 
+            // btnNextSolution
+            // 
+            this.btnNextSolution.BackColor = System.Drawing.Color.Lime;
+            this.btnNextSolution.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNextSolution.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnNextSolution.Location = new System.Drawing.Point(696, 416);
+            this.btnNextSolution.Name = "btnNextSolution";
+            this.btnNextSolution.Size = new System.Drawing.Size(78, 50);
+            this.btnNextSolution.TabIndex = 8;
+            this.btnNextSolution.Text = "Next Solution";
+            this.btnNextSolution.UseVisualStyleBackColor = false;
+            this.btnNextSolution.Click += new System.EventHandler(this.btnNextSolution_Click);
+            // 
+            // textSolution
+            // 
+            this.textSolution.Location = new System.Drawing.Point(180, 184);
+            this.textSolution.Multiline = true;
+            this.textSolution.Name = "textSolution";
+            this.textSolution.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textSolution.Size = new System.Drawing.Size(593, 226);
+            this.textSolution.TabIndex = 7;
+            // 
             // textResult
             // 
             this.textResult.Location = new System.Drawing.Point(180, 51);
             this.textResult.Multiline = true;
             this.textResult.Name = "textResult";
             this.textResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textResult.Size = new System.Drawing.Size(593, 409);
+            this.textResult.Size = new System.Drawing.Size(593, 107);
             this.textResult.TabIndex = 6;
             // 
             // btnImportData
@@ -144,6 +196,10 @@ namespace ResourceAllocationApp.screen
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnImportData;
         private System.Windows.Forms.TextBox textResult;
+        private System.Windows.Forms.TextBox textSolution;
+        private System.Windows.Forms.Button btnNextSolution;
+        private System.Windows.Forms.Label labelSolution;
+        private System.Windows.Forms.Button btnFrontSolution;
     }
 }
 
