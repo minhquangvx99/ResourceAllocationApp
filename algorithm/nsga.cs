@@ -58,15 +58,11 @@ namespace ResourceAllocationApp.algorithm
             F = fast_nondominated_sort(obj_constrs);
             int n_front = F.Count;
             List<int> result = new List<int>();
-            for (int i = 0; i < n_front; i++)
+            int current_len = result.Count;
+            if (current_len < pop_size)
             {
-                int current_len = result.Count;
-                if (current_len < pop_size)
-                {
-                    int[] F_i = (int[])F[i];
-                    result.AddRange(crowding_distance_selection(obj_constrs, F_i, pop_size - current_len));
-                }
-                break;
+                int[] F_i = (int[])F[0];
+                result.AddRange(crowding_distance_selection(obj_constrs, F_i, pop_size - current_len));
             }
             var ans = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
 
