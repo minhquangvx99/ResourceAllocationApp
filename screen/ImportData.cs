@@ -27,6 +27,7 @@ namespace ResourceAllocationApp.screen
             var filename = textFileName.Text.Trim();
             string projectDirectory = Directory.GetParent("ResourceAllocationApp").Parent.FullName;
             string path = projectDirectory.Remove(projectDirectory.Count() - 4, 4) +"/data";
+            //string path = projectDirectory + "/ResourceAllocationAppSetup/data";
             Console.WriteLine(path);
             var fullpath = Path.Combine(path, filename);
             random_Q r = new random_Q();
