@@ -40,13 +40,41 @@ namespace ResourceAllocationApp.algorithm
                     Rt = P[t];
                 }
                 var new_P = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
-                new_P = selection(Rt, pop_size);
+                //new_P = selection(Rt, pop_size);
+                new_P = findNash(Rt);
                 P.Add(new_P);
                 Q.Add(make_new_pop(new_P, Pc, Pm, para,r));
             }
             return P[max_gen];
         }
-
+        public List<Tuple<individual, Tuple<List<double>, List<double>>>> findNash(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info)
+        {
+            var ans = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
+            ArrayList objects = new ArrayList();
+            for (int i = 0; i < population_info.Count; i++)
+            {
+                objects.Add(population_info[i].Item2.Item1.ToArray());
+            }
+            double[] objects_0 = (double[])objects[0];
+            int m = objects_0.Length;
+            double[] min = objects_0;
+            int min_i = 0;
+            int pop_size = objects.Count;
+            for (int i = 1; i < pop_size; i++)
+            {
+                double[] objects_i = (double[])objects[i];
+                for (int t = 0; t < m; t++)
+                {
+                    if (objects_i[t] > min[t])
+                    {
+                        min = objects_i;
+                        min_i = i;
+                    }
+                }
+            }
+            ans.Add(population_info[min_i]);
+            return ans;
+        }
         public List<Tuple<individual, Tuple<List<double>, List<double>>>> selection(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, int pop_size)
         {
             var obj_constrs = new List<Tuple<List<double>, List<double>>>();
@@ -208,10 +236,10 @@ namespace ResourceAllocationApp.algorithm
                 objects.Add(obj_constr[i].Item1.ToArray());
                 constraints.Add(obj_constr[i].Item2.ToArray());
             }
-            int[] objects_0 = (int[])objects[0];
+            double[] objects_0 = (double[])objects[0];
             int m = objects_0.Length;
             int pop_size = objects.Count;
-            int[] distance = new int[pop_size];
+            double[] distance = new double[pop_size];
             for (int i = 0; i < pop_size; i++)
             {
                 distance[i] = 0;
@@ -234,22 +262,22 @@ namespace ResourceAllocationApp.algorithm
 
                     while (i <= j)
                     {
-                        int[] objects_arr = (int[])objects[arr[i]];
-                        int[] objects_pivot = (int[])objects[pivot];
+                        double[] objects_arr = (double[])objects[arr[i]];
+                        double[] objects_pivot = (double[])objects[pivot];
                         while (objects_arr[t] < objects_pivot[t])
                         {
                             i++;
-                            objects_arr = (int[])objects[arr[i]];
-                            objects_pivot = (int[])objects[pivot];
+                            objects_arr = (double[])objects[arr[i]];
+                            objects_pivot = (double[])objects[pivot];
                         }
 
-                        objects_arr = (int[])objects[arr[j]];
-                        objects_pivot = (int[])objects[pivot];
+                        objects_arr = (double[])objects[arr[j]];
+                        objects_pivot = (double[])objects[pivot];
                         while (objects_arr[t] > objects_pivot[t])
                         {
                             j--;
-                            objects_arr = (int[])objects[arr[j]];
-                            objects_pivot = (int[])objects[pivot];
+                            objects_arr = (double[])objects[arr[j]];
+                            objects_pivot = (double[])objects[pivot];
                         }
 
                         if (i <= j)
@@ -278,8 +306,8 @@ namespace ResourceAllocationApp.algorithm
                 distance[sortedIndices[pop_size - 1]] += INFINITY;
                 for (int i = 1; i < pop_size - 1; i++)
                 {
-                    int[] objects_1 = (int[])objects[sortedIndices[i + 1]];
-                    int[] objects_2 = (int[])objects[sortedIndices[i - 1]];
+                    double[] objects_1 = (double[])objects[sortedIndices[i + 1]];
+                    double[] objects_2 = (double[])objects[sortedIndices[i - 1]];
 
                     distance[sortedIndices[i]] += objects_1[t] + objects_2[t];
                 }
