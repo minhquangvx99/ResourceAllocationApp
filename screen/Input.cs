@@ -56,7 +56,7 @@ namespace ResourceAllocationApp.screen
                 para = new parameter();
                 para.process(fullpath);
                 individual pop = new individual();
-                nsga ng = new nsga();
+                nash_ga ng = new nash_ga();
                 common cm = new common();
                 random_Q r = new random_Q();
                 pop.randomize(para, r);

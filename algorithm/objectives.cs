@@ -219,7 +219,6 @@ namespace ResourceAllocationApp.algorithm
             }
             return total_h_conflict / para.humans + total_m_conflict / para.machines;
         }
-
         public double f_cost(individual ind, parameter para)
         {
             double h_cost = 0;
@@ -274,7 +273,89 @@ namespace ResourceAllocationApp.algorithm
             }
             return h_cost / para.humans + m_cost / para.machines;
         }
-
+        public double countDuration(parameter para, int h_i, int m_i, int i)
+        {
+            double h_aff = 0;
+            double m_aff = 1;
+            double sum_prod = 0;
+            int new_mreq = 0;
+            for (int s = 0; s < para.skills; s++)
+            {
+                double sum_exp = 0;
+                for (int h = 1; h < para.humans; h++)
+                {
+                    double[] LEXP_k1 = (double[])para.LEXP[h - 1];
+                    if ((h_i & (1 << (para.humans - h))) != 0)
+                    {
+                        sum_exp += LEXP_k1[s];
+                    }
+                }
+                int[] TREQ_i = (int[])para.TREQ[i];
+                if (sum_exp != 0)
+                {
+                    h_aff = Math.Max(h_aff, TREQ_i[s] / sum_exp);
+                }
+            }
+            int[] MREQ_i = (int[])para.MREQ[i];
+            for (int k = 0; k < para.machines; k++)
+            {
+                if (MREQ_i[k] == 1)
+                {
+                    new_mreq += 1;
+                    if ((m_i & (1 << (para.machines - k))) != 0)
+                    {
+                        sum_prod += para.m_prod[k];
+                    }
+                }
+            }
+            if (sum_prod != 0)
+            {
+                m_aff = new_mreq / sum_prod;
+            }
+            return m_aff * h_aff * para.t_duration[i];
+        }
+        public double countCost(parameter para, int h_i, int m_i, int i)
+        {
+            double h_cost = 0;
+            double m_cost = 0;
+            double[] h_working_time = new double[para.humans];
+            double[] m_working_time = new double[para.machines];
+            for (int hh = 1; hh < para.humans + 1; hh++)
+            {
+                if ((h_i & (1 << (para.humans - hh))) != 0)
+                {
+                    for (int h = 0; h < para.humans; h++)
+                    {
+                        h_working_time[h] = para.t_duration[hh];
+                    }
+                }
+            }
+            for (int mm = 1; mm < para.machines + 1; mm++)
+            {
+                if ((m_i & (1 << (para.machines - mm))) != 0)
+                {
+                    for (int m = 0; m < para.machines; m++)
+                    {
+                        m_working_time[m] = para.t_duration[mm];
+                    }
+                }
+            }
+            for (int h = 0; h < para.humans; h++)
+            {
+                double wage = 0;
+                double[] LEXP_i = (double[])para.LEXP[h];
+                for (int k = 0; k < para.skills; k++)
+                {
+                    wage += LEXP_i[k];
+                }
+                h_cost += para.h_salary[h] * wage * h_working_time[h];
+            }
+            for (int m = 0; m < para.machines; m++)
+            {
+                m_cost += para.m_consuming[m] * m_working_time[m];
+            }
+            return h_cost / para.humans + m_cost / para.machines;
+        }
         public Tuple<List<double>, List<double>> objectives_constraints(individual ind, parameter para)
         {
             List<double> obj = new List<double>();

@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="algorithm\random_Q.cs" />
     <Compile Include="algorithm\individual.cs" />
-    <Compile Include="algorithm\nsga.cs" />
+    <Compile Include="algorithm\nash_ga.cs" />
     <Compile Include="algorithm\objectives.cs" />
     <Compile Include="algorithm\population.cs" />
     <Compile Include="daos\parameter.cs" />
