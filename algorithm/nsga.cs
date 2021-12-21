@@ -31,9 +31,10 @@ namespace ResourceAllocationApp.algorithm
             for (int t = 0; t < max_gen; t++)
             {
                 var Rt = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
-                if (t < Q.Count)
+                if (t - 1 >= 0)
                 {
-                    Rt = P[t].Concat(Q[t]).ToList();
+                    Rt = P[t];
+                    Rt.AddRange(Q[t-1]);
                 }
                 else
                 {
@@ -208,10 +209,10 @@ namespace ResourceAllocationApp.algorithm
                 objects.Add(obj_constr[i].Item1.ToArray());
                 constraints.Add(obj_constr[i].Item2.ToArray());
             }
-            int[] objects_0 = (int[])objects[0];
+            double[] objects_0 = (double[])objects[0];
             int m = objects_0.Length;
             int pop_size = objects.Count;
-            int[] distance = new int[pop_size];
+            double[] distance = new double[pop_size];
             for (int i = 0; i < pop_size; i++)
             {
                 distance[i] = 0;
@@ -234,22 +235,22 @@ namespace ResourceAllocationApp.algorithm
 
                     while (i <= j)
                     {
-                        int[] objects_arr = (int[])objects[arr[i]];
-                        int[] objects_pivot = (int[])objects[pivot];
+                        double[] objects_arr = (double[])objects[arr[i]];
+                        double[] objects_pivot = (double[])objects[pivot];
                         while (objects_arr[t] < objects_pivot[t])
                         {
                             i++;
-                            objects_arr = (int[])objects[arr[i]];
-                            objects_pivot = (int[])objects[pivot];
+                            objects_arr = (double[])objects[arr[i]];
+                            objects_pivot = (double[])objects[pivot];
                         }
 
-                        objects_arr = (int[])objects[arr[j]];
-                        objects_pivot = (int[])objects[pivot];
+                        objects_arr = (double[])objects[arr[j]];
+                        objects_pivot = (double[])objects[pivot];
                         while (objects_arr[t] > objects_pivot[t])
                         {
                             j--;
-                            objects_arr = (int[])objects[arr[j]];
-                            objects_pivot = (int[])objects[pivot];
+                            objects_arr = (double[])objects[arr[j]];
+                            objects_pivot = (double[])objects[pivot];
                         }
 
                         if (i <= j)
@@ -278,8 +279,8 @@ namespace ResourceAllocationApp.algorithm
                 distance[sortedIndices[pop_size - 1]] += INFINITY;
                 for (int i = 1; i < pop_size - 1; i++)
                 {
-                    int[] objects_1 = (int[])objects[sortedIndices[i + 1]];
-                    int[] objects_2 = (int[])objects[sortedIndices[i - 1]];
+                    double[] objects_1 = (double[])objects[sortedIndices[i + 1]];
+                    double[] objects_2 = (double[])objects[sortedIndices[i - 1]];
 
                     distance[sortedIndices[i]] += objects_1[t] + objects_2[t];
                 }
