@@ -39,14 +39,15 @@ namespace ResourceAllocationApp.algorithm
             P.Add(population_info);
             var Q = new List<List<Tuple<individual, Tuple<List<double>, List<double>>>>>();
             var new_P = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
-            int check = 0;
             int step = 0;
             while(true)
             {
+                int check = 1;
                 var Rt = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
-                if (step < Q.Count)
+                if (step - 1 >= 0)
                 {
-                    Rt = P[step].Concat(Q[step]).ToList();
+                    Rt = P[step];
+                    Rt.AddRange(Q[step - 1]);
                 }
                 else
                 {
@@ -55,7 +56,7 @@ namespace ResourceAllocationApp.algorithm
                 new_P = findNash(Rt, para, ref S_h, ref S_m, ref check, ref min);
                 P.Add(new_P);
                 Q.Add(make_new_pop(new_P, Pc, Pm, para, r));
-                if(check == 0 || step >= 99)
+                if (check == 1)
                 {
                     break;
                 }
@@ -75,12 +76,12 @@ namespace ResourceAllocationApp.algorithm
             }
             List<Tuple<individual, Tuple<List<double>, List<double>>>> ans;
             pop_size = population_info.Count;
-            List<int> S_temp_h = new List<int>();
-            List<int> S_temp_m = new List<int>();
+            int[] S_temp_h = new int[para.tasks];
+            int[] S_temp_m = new int[para.tasks];
             for (int i = 0; i < para.tasks; i++)
             {
-                S_temp_h.Add(-1);
-                S_temp_m.Add(-1);
+                S_temp_h[i] = -1;
+                S_temp_m[i] = -1;
             }
             for (int i = 0; i < para.tasks; i++)
             {
@@ -119,14 +120,14 @@ namespace ResourceAllocationApp.algorithm
             }
             for (int i = 0; i < para.tasks; i++)
             {
-                if (S_h[i] != S_temp_h[i])
+                if (S_temp_h[i] != -1)
                 {
-                    check = 1;
+                    check = 0;
                     break;
                 }
-                if (S_m[i] != S_temp_m[i])
+                if (S_temp_m[i] != -1)
                 {
-                    check = 1;
+                    check = 0;
                     break;
                 }
             }
