@@ -21,7 +21,7 @@ namespace ResourceAllocationApp.algorithm
                 t_human_assign.Add(0);
                 t_machine_assign.Add(0);
             }
-            for(int i = 0; i < para.tasks; i++)
+            for (int i = 0; i < para.tasks; i++)
             {
                 t_human_assign[i] = r.random_rd(1, (1 << para.humans));
                 t_machine_assign[i] = r.random_rd(1, (1 << para.machines));
@@ -46,13 +46,13 @@ namespace ResourceAllocationApp.algorithm
                     t_m_bit_string = t_m_bit_string + "0";
                 }
                 List<string> t_h_bit_string_list = new List<string>();
-                if (cm.rand_pos(t_h_bit_assign,r) != -1)
+                if (cm.rand_pos(t_h_bit_assign, r) != -1)
                 {
                     for (int j = 0; j < t_h_bit_string.Length; j++)
                     {
                         t_h_bit_string_list.Add(t_h_bit_string[j].ToString());
                     }
-                    t_h_bit_string_list[cm.rand_pos(t_h_bit_assign,r)]= "1";
+                    t_h_bit_string_list[cm.rand_pos(t_h_bit_assign, r)] = "1";
                     t_h_bit_string = "";
                     for (int j = 0; j < t_h_bit_string_list.Count; j++)
                     {
@@ -60,13 +60,13 @@ namespace ResourceAllocationApp.algorithm
                     }
                 }
                 List<string> t_m_bit_string_list = new List<string>();
-                if (cm.rand_pos(t_m_bit_assign,r) != -1)
+                if (cm.rand_pos(t_m_bit_assign, r) != -1)
                 {
                     for (int j = 0; j < t_m_bit_string.Length; j++)
                     {
                         t_m_bit_string_list.Add(t_m_bit_string[j].ToString());
                     }
-                    t_m_bit_string_list[cm.rand_pos(t_m_bit_assign,r)] = "1";
+                    t_m_bit_string_list[cm.rand_pos(t_m_bit_assign, r)] = "1";
                     t_m_bit_string = "";
                     for (int j = 0; j < t_m_bit_string_list.Count; j++)
                     {
