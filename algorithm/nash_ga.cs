@@ -17,7 +17,7 @@ namespace ResourceAllocationApp.algorithm
         public List<Tuple<individual, Tuple<List<double>, List<double>>>> run(parameter para, List<individual> pop_init, random_Q r)
         {
             var population_info = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
-            int pop_size = 30;
+            int pop_size = 100;
             for (int i = 0; i < pop_size; i++)
             {
                 var tuple = new Tuple<individual, Tuple<List<double>, List<double>>>((pop_init[i]), (obj.objectives_constraints(pop_init[i], para)));
@@ -54,6 +54,7 @@ namespace ResourceAllocationApp.algorithm
         public Tuple<int[,], int[,], int[]> Selection(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, parameter para, random_Q r, int pop_size, double[,] min)
         {
             List<individual> ind = new List<individual>();
+            pop_size = population_info.Count;
             for (int i = 0; i < pop_size; i++)
             {
                 ind.Add(population_info[i].Item1);
@@ -96,33 +97,28 @@ namespace ResourceAllocationApp.algorithm
             for (int i = 0; i < para.tasks; i++)
             {
                 int j_save = -1;
-                int k_save = -1;
                 int temp_S_h = S_h[i];
                 int temp_S_m = S_m[i];
                 double[] res = new double[2];
                 for (int j = 0; j < l[i]; j++)
                 {
-                    for(int k = 0; k < l[i]; k ++)
+                    S_h[i] = h[i, j];
+                    S_m[i] = m[i, j];
+                    res[0] = obj.countDuration(para, S_h[i], S_m[i], i);
+                    res[1] = obj.countCost(para, S_h[i], S_m[i], i);
+                    if ((res[1] < min[i, 1] && res[0] < min[i, 0]) || (res[1] == min[i, 1] && res[0] < min[i, 0]) || (res[1] < min[i, 1] && res[0] == min[i, 0]))
                     {
-                        S_h[i] = h[i,j];
-                        S_m[i] = m[i,k];
-                        res[0] = obj.countDuration(para, S_h[i], S_m[i], i);
-                        res[1] = obj.countCost(para, S_h[i], S_m[i], i);
-                        if ((res[1] < min[i, 1] && res[0] < min[i, 0]) || (res[1] == min[i, 1] && res[0] < min[i, 0]) || (res[1] < min[i, 1] && res[0] == min[i, 0]))
-                        {
-                            j_save = j;
-                            k_save = k;
-                            min[i, 0] = res[0];
-                            min[i, 1] = res[1];
-                        }
+                        j_save = j;
+                        min[i, 0] = res[0];
+                        min[i, 1] = res[1];
                     }
                 }
                 if (j_save != -1)
                 {
                     S_temp_h[i] = h[i,j_save];
-                    S_temp_m[i] = m[i,k_save];
+                    S_temp_m[i] = m[i, j_save];
                     S_h[i] = h[i,j_save];
-                    S_m[i] = m[i,k_save];
+                    S_m[i] = m[i, j_save];
                 }
                 else
                 {

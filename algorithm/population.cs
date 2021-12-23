@@ -13,7 +13,7 @@ namespace ResourceAllocationApp.algorithm
         public List<individual> make_pop(parameter para, random_Q r)
         {
             List<individual> pop = new List<individual>();
-            int pop_size = 30;
+            int pop_size = 100;
             for (int i = 0; i < pop_size; i++)
             {
                 individual ind = new individual();
