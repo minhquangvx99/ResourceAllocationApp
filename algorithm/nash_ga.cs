@@ -27,7 +27,6 @@ namespace ResourceAllocationApp.algorithm
             }
             List<int> S_h = new List<int>();
             List<int> S_m = new List<int>();
-            double[,] min = new double[para.tasks, 2];
             for (int i = 0; i < para.tasks; i++)
             {
                 S_h.Add(pop_init[0].t_human_assign[i]);
@@ -37,7 +36,6 @@ namespace ResourceAllocationApp.algorithm
             child_ind_max.set(S_h, S_m);
             var tuple_S_max = new Tuple<individual, Tuple<List<double>, List<double>>>((child_ind_max), (obj.objectives_constraints(child_ind_max, para)));
             List<Tuple<individual, Tuple<List<double>, List<double>>>> new_P;
-            int step = 1;
             while (true)
             {
                 int check = 1;
@@ -47,7 +45,6 @@ namespace ResourceAllocationApp.algorithm
                 {
                     break;
                 }
-                step++;
             }
             return new_P;
         }
