@@ -27,20 +27,25 @@ namespace ResourceAllocationApp.algorithm
             }
             List<int> S_h = new List<int>();
             List<int> S_m = new List<int>();
+            double[,] min = new double[para.tasks, 2];
             for (int i = 0; i < para.tasks; i++)
             {
                 S_h.Add(pop_init[0].t_human_assign[i]);
                 S_m.Add(pop_init[0].t_machine_assign[i]);
+                min[i, 0] = obj.countDuration(para, S_h[i], S_m[i], i);
+                min[i, 1] = obj.countCost(para, S_h[i], S_m[i], i);
             }
             individual child_ind_max = new individual();
             child_ind_max.set(S_h, S_m);
             var tuple_S_max = new Tuple<individual, Tuple<List<double>, List<double>>>((child_ind_max), (obj.objectives_constraints(child_ind_max, para)));
-            List<Tuple<individual, Tuple<List<double>, List<double>>>> new_P;
+            var new_P = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
+            Tuple<int[,], int[,], int[]> hm = Selection(population_info, para, r, pop_size, min);
             while (true)
             {
                 int check = 1;
-                new_P = findNash(population_info, para, ref S_h, ref S_m, ref check, ref tuple_S_max);
+                new_P = findNash(hm, para, ref S_h, ref S_m, ref check, ref tuple_S_max);
                 population_info = make_new_pop(population_info, Pc, Pm, para, r);
+                hm = Selection(population_info, para, r, pop_size, min);
                 if (check == 1)
                 {
                     break;
@@ -48,15 +53,38 @@ namespace ResourceAllocationApp.algorithm
             }
             return new_P;
         }
-        public List<Tuple<individual, Tuple<List<double>, List<double>>>> findNash(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info,
-            parameter para, ref List<int> S_h, ref List<int> S_m, ref int check, ref Tuple<individual, Tuple<List<double>, List<double>>> tuple_S_max)
+        public Tuple<int[,], int[,], int[]> Selection(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, parameter para, random_Q r, int pop_size, double[,] min)
         {
             List<individual> ind = new List<individual>();
-            int pop_size = population_info.Count;
+            pop_size = population_info.Count;
             for (int i = 0; i < pop_size; i++)
             {
                 ind.Add(population_info[i].Item1);
             }
+            int[,] h = new int[para.tasks, pop_size];
+            int[,] m = new int[para.tasks, pop_size];
+            int[] l = new int[para.tasks];
+            for (int i = 0; i < para.tasks; i++)
+            {
+                l[i] = 0;
+                for (int j = 0; j < pop_size; j++)
+                {
+                    double res_0 = obj.countDuration(para, ind[j].t_human_assign[i], ind[j].t_machine_assign[i], i);
+                    double res_1 = obj.countCost(para, ind[j].t_human_assign[i], ind[j].t_machine_assign[i], i);
+                    if (res_1<= min[i,1] && res_0 <=min[i,0])
+                    {
+                        h[i, l[i]] = ind[j].t_human_assign[i];
+                        m[i, l[i]] = ind[j].t_machine_assign[i];
+                        l[i]++;
+                    }
+                }
+            }
+            var tuple = new Tuple<int[,], int[,], int[]>(h, m, l);
+            return tuple;
+        }
+        public List<Tuple<individual, Tuple<List<double>, List<double>>>> findNash(Tuple<int[,], int[,], int[]> hm,
+            parameter para, ref List<int> S_h, ref List<int> S_m, ref int check, ref Tuple<individual, Tuple<List<double>, List<double>>> tuple_S_max)
+        {
             List<Tuple<individual, Tuple<List<double>, List<double>>>> ans;
             int[] S_temp_h = new int[para.tasks];
             int[] S_temp_m = new int[para.tasks];
@@ -65,16 +93,19 @@ namespace ResourceAllocationApp.algorithm
                 S_temp_h[i] = -1;
                 S_temp_m[i] = -1;
             }
+            int[,] h = hm.Item1;
+            int[,] m = hm.Item2;
+            int[] l = hm.Item3;
             for (int i = 0; i < para.tasks; i++)
             {
                 int j_save = -1;
                 int temp_S_h = S_h[i];
                 int temp_S_m = S_m[i];
                 double[] res = new double[2];
-                for (int j = 0; j < pop_size; j++)
+                for (int j = 0; j < l[i]; j++)
                 {
-                    S_h[i] = ind[j].t_human_assign[i];
-                    S_m[i] = ind[j].t_machine_assign[i];
+                    S_h[i] = h[i, j];
+                    S_m[i] = m[i, j];
                     individual child_ind_res = new individual();
                     child_ind_res.set(S_h, S_m);
                     var tuple_S_res = new Tuple<individual, Tuple<List<double>, List<double>>>((child_ind_res), (obj.objectives_constraints(child_ind_res, para)));
@@ -82,7 +113,7 @@ namespace ResourceAllocationApp.algorithm
                     List<double> max = tuple_S_max.Item2.Item1;
                     if (rs[0] >= max[0] && rs[1] >= max[1] && rs[2] >= max[2])
                     {
-                        if(!(rs[0] == max[0] && rs[1] == max[1] && rs[2] == max[2]))
+                        if (!(rs[0] == max[0] && rs[1] == max[1] && rs[2] == max[2]))
                         {
                             j_save = j; ;
                             tuple_S_max = tuple_S_res;
@@ -91,10 +122,10 @@ namespace ResourceAllocationApp.algorithm
                 }
                 if (j_save != -1)
                 {
-                    S_temp_h[i] = ind[j_save].t_human_assign[i];
-                    S_temp_m[i] = ind[j_save].t_machine_assign[i];
-                    S_h[i] = ind[j_save].t_human_assign[i];
-                    S_m[i] = ind[j_save].t_machine_assign[i];
+                    S_temp_h[i] = h[i, j_save];
+                    S_temp_m[i] = m[i, j_save];
+                    S_h[i] = h[i, j_save];
+                    S_m[i] = m[i, j_save];
                 }
                 else
                 {
