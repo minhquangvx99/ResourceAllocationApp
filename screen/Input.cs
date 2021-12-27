@@ -25,7 +25,6 @@ namespace ResourceAllocationApp.screen
         }
         private void showSolution()
         {
-            labelSolution.Text = "Solution " + (indexSolution + 1).ToString();
             string solution_i="";
             string[] temp = solution[indexSolution];
             for (int i=0; i < temp.Length; i++)
@@ -40,7 +39,6 @@ namespace ResourceAllocationApp.screen
                 }
             }
             textSolution.Text = solution_i;
-            
         }
         private void btnOpenDataFile_Click(object sender, EventArgs e)
         {
@@ -48,7 +46,6 @@ namespace ResourceAllocationApp.screen
             OpenFileDialog dlg = new OpenFileDialog();
             textResult.Text = "";
             textSolution.Text = "";
-            labelSolution.Text = "Solution";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 indexSolution = 0;
@@ -62,7 +59,7 @@ namespace ResourceAllocationApp.screen
                 pop.randomize(para, r);
                 population pp = new population();
                 List<individual> pop_init = pp.make_pop(para, r);
-                List<Tuple<individual, Tuple<List<double>, List<double>>>> best_allocate = ng.run(para, pop_init, r);
+                Tuple<individual, Tuple<List<double>, List<double>>> best_allocate = ng.run(para, pop_init, r);
                 Tuple<string, List<string[]>> tuple = cm.printPop(best_allocate, para.humans, para.machines);
                 textResult.Text = tuple.Item1;
                 solution = tuple.Item2;
@@ -80,22 +77,6 @@ namespace ResourceAllocationApp.screen
             this.Hide();
             ImportData f = new ImportData();
             f.ShowDialog();
-        }
-        private void btnFrontSolution_Click(object sender, EventArgs e)
-        {
-            if (indexSolution-1 >= 0)
-            {
-                indexSolution--;
-                showSolution();
-            }
-        }
-        private void btnNextSolution_Click(object sender, EventArgs e)
-        {
-            if (indexSolution+1 < solution.Count )
-            {
-                indexSolution++;
-                showSolution();
-            }
         }
         private void btnExit_Click(object sender, EventArgs e)
         {

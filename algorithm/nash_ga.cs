@@ -14,7 +14,7 @@ namespace ResourceAllocationApp.algorithm
     {
         const int INFINITY = 10000;
         objectives obj = new objectives();
-        public List<Tuple<individual, Tuple<List<double>, List<double>>>> run(parameter para, List<individual> pop_init, random_Q r)
+        public Tuple<individual, Tuple<List<double>, List<double>>> run(parameter para, List<individual> pop_init, random_Q r)
         {
             var population_info = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
             int pop_size = pop_init.Count;
@@ -38,7 +38,7 @@ namespace ResourceAllocationApp.algorithm
             individual child_ind_max = new individual();
             child_ind_max.set(S_h, S_m);
             var tuple_S_max = new Tuple<individual, Tuple<List<double>, List<double>>>((child_ind_max), (obj.objectives_constraints(child_ind_max, para)));
-            var new_P = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
+            Tuple<individual, Tuple<List<double>, List<double>>> new_P;
             Tuple<int[,], int[,], int[]> hm = Selection(population_info, para, r, pop_size, min);
             while (true)
             {
@@ -82,10 +82,9 @@ namespace ResourceAllocationApp.algorithm
             var tuple = new Tuple<int[,], int[,], int[]>(h, m, l);
             return tuple;
         }
-        public List<Tuple<individual, Tuple<List<double>, List<double>>>> findNash(Tuple<int[,], int[,], int[]> hm,
+        public Tuple<individual, Tuple<List<double>, List<double>>> findNash(Tuple<int[,], int[,], int[]> hm,
             parameter para, ref List<int> S_h, ref List<int> S_m, ref int check, ref Tuple<individual, Tuple<List<double>, List<double>>> tuple_S_max)
         {
-            List<Tuple<individual, Tuple<List<double>, List<double>>>> ans;
             int[] S_temp_h = new int[para.tasks];
             int[] S_temp_m = new int[para.tasks];
             for (int i = 0; i < para.tasks; i++)
@@ -146,9 +145,7 @@ namespace ResourceAllocationApp.algorithm
                     break;
                 }
             }
-            ans = new List<Tuple<individual, Tuple<List<double>, List<double>>>>();
-            ans.Add(tuple_S_max);
-            return ans;
+            return tuple_S_max;
         }
         public List<Tuple<individual, Tuple<List<double>, List<double>>>> make_new_pop(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, double Pc, double Pm, parameter para, random_Q r)
         {
