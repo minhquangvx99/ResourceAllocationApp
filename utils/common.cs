@@ -71,90 +71,86 @@ namespace ResourceAllocationApp.utils
                 individual ele = populationInfo[i].Item1;
                 List<double> ob_constr = populationInfo[i].Item2.Item1;
                 ind += 1;
-                if (ind > 0)
+                result += "\r\nsolution " + ind.ToString();
+                result += "\r\nt_machine_assign: [";
+                for (int m = 0; m < ele.t_machine_assign.Count; m++)
                 {
-                    result += "\r\nsolution " + ind.ToString();
-                    result += "\r\nt_machine_assign: [";
-                    for (int m = 0; m < ele.t_machine_assign.Count; m++)
+                    string temp = Convert.ToString(ele.t_machine_assign[m], 2);
+                    for (int p = 0; p < temp.Length; p++)
                     {
-                        string temp = Convert.ToString(ele.t_machine_assign[m],2);
-                        for (int p = 0; p < temp.Length; p++)
+                        if (temp[p] == '1')
                         {
-                            if (temp[p] == '1')
-                            {
-                                str[numResourceMachine - temp.Length] += (m + 1).ToString() + ", ";
-                            }
-                        }
-                        for (int k=temp.Length;k<numResourceMachine;k++)
-                        {
-                            temp = "0" + temp;
-                        }
-                        if (m == ele.t_machine_assign.Count - 1)
-                        {
-                            result += temp;
-                        }
-                        else
-                        {
-                            result += temp + ", ";
-                        }
-
-                    }
-                    result += "]";
-                    result += "\r\nt_human_assign: [";
-                    for (int h = 0; h < ele.t_human_assign.Count; h++)
-                    {
-                        string temp = Convert.ToString(ele.t_human_assign[h], 2);
-                        for (int p = 0; p < temp.Length; p++)
-                        {
-                            if (temp[p] == '1')
-                            {
-                                str[numResourceHuman + numResourceMachine - temp.Length] += (h + 1).ToString() + ", ";
-                            }
-                        }
-                        for (int k = temp.Length; k < numResourceHuman; k++)
-                        {
-                            temp = "0" + temp;
-                        }
-                        if (h == ele.t_human_assign.Count - 1)
-                        {
-                            result += temp;
-                        }
-                        else
-                        {
-                            result += temp+ ", ";
+                            str[numResourceMachine - temp.Length] += (m + 1).ToString() + ", ";
                         }
                     }
-                    result += "]";
-
-                    result += "\r\nraw_m: [";
-                    for (int m = 0; m < ele.t_machine_assign.Count; m++)
+                    for (int k = temp.Length; k < numResourceMachine; k++)
                     {
-                        if (m == ele.t_machine_assign.Count - 1)
-                        {
-                            result += ele.t_machine_assign[m].ToString();
-                        }
-                        else
-                        {
-                            result += ele.t_machine_assign[m].ToString() + ", ";
-                        }
-
+                        temp = "0" + temp;
                     }
-                    result += "]";
-                    result += "\r\nraw_h: [";
-                    for (int h = 0; h < ele.t_human_assign.Count; h++)
+                    if (m == ele.t_machine_assign.Count - 1)
                     {
-                        if(h== ele.t_human_assign.Count - 1)
-                        {
-                            result += ele.t_human_assign[h].ToString() ;
-                        }
-                        else
-                        {
-                            result += ele.t_human_assign[h].ToString() + ", ";
-                        }
+                        result += temp;
                     }
-                    result += "]";
+                    else
+                    {
+                        result += temp + ", ";
+                    }
 
                 }
+                result += "]";
+                result += "\r\nt_human_assign: [";
+                for (int h = 0; h < ele.t_human_assign.Count; h++)
+                {
+                    string temp = Convert.ToString(ele.t_human_assign[h], 2);
+                    for (int p = 0; p < temp.Length; p++)
+                    {
+                        if (temp[p] == '1')
+                        {
+                            str[numResourceHuman + numResourceMachine - temp.Length] += (h + 1).ToString() + ", ";
+                        }
+                    }
+                    for (int k = temp.Length; k < numResourceHuman; k++)
+                    {
+                        temp = "0" + temp;
+                    }
+                    if (h == ele.t_human_assign.Count - 1)
+                    {
+                        result += temp;
+                    }
+                    else
+                    {
+                        result += temp + ", ";
+                    }
+                }
+                result += "]";
+
+                result += "\r\nraw_m: [";
+                for (int m = 0; m < ele.t_machine_assign.Count; m++)
+                {
+                    if (m == ele.t_machine_assign.Count - 1)
+                    {
+                        result += ele.t_machine_assign[m].ToString();
+                    }
+                    else
+                    {
+                        result += ele.t_machine_assign[m].ToString() + ", ";
+                    }
+
+                }
+                result += "]";
+                result += "\r\nraw_h: [";
+                for (int h = 0; h < ele.t_human_assign.Count; h++)
+                {
+                    if (h == ele.t_human_assign.Count - 1)
+                    {
+                        result += ele.t_human_assign[h].ToString();
+                    }
+                    else
+                    {
+                        result += ele.t_human_assign[h].ToString() + ", ";
+                    }
+                }
+                result += "]";
                 solution.Add(str);
                 for (int j = 0; j < numObj; j++)
                 {
