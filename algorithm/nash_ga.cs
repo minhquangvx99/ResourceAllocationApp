@@ -38,12 +38,11 @@ namespace ResourceAllocationApp.algorithm
             individual child_ind_max = new individual();
             child_ind_max.set(S_h, S_m);
             var tuple_S_max = new Tuple<individual, Tuple<List<double>, List<double>>>((child_ind_max), (obj.objectives_constraints(child_ind_max, para)));
-            Tuple<individual, Tuple<List<double>, List<double>>> new_P;
             Tuple<int[,], int[,], int[]> hm = Selection(population_info, para, r, pop_size, min);
             while (true)
             {
                 int check = 1;
-                new_P = findNash(hm, para, ref S_h, ref S_m, ref check, ref tuple_S_max);
+                findNash(hm, para, ref S_h, ref S_m, ref check, ref tuple_S_max);
                 population_info = make_new_pop(population_info, Pc, Pm, para, r);
                 hm = Selection(population_info, para, r, pop_size, min);
                 if (check == 1)
@@ -51,7 +50,7 @@ namespace ResourceAllocationApp.algorithm
                     break;
                 }
             }
-            return new_P;
+            return tuple_S_max;
         }
         public Tuple<int[,], int[,], int[]> Selection(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, parameter para, random_Q r, int pop_size, double[,] min)
         {
@@ -82,7 +81,7 @@ namespace ResourceAllocationApp.algorithm
             var tuple = new Tuple<int[,], int[,], int[]>(h, m, l);
             return tuple;
         }
-        public Tuple<individual, Tuple<List<double>, List<double>>> findNash(Tuple<int[,], int[,], int[]> hm,
+        public void findNash(Tuple<int[,], int[,], int[]> hm,
             parameter para, ref List<int> S_h, ref List<int> S_m, ref int check, ref Tuple<individual, Tuple<List<double>, List<double>>> tuple_S_max)
         {
             int[] S_temp_h = new int[para.tasks];
@@ -145,7 +144,6 @@ namespace ResourceAllocationApp.algorithm
                     break;
                 }
             }
-            return tuple_S_max;
         }
         public List<Tuple<individual, Tuple<List<double>, List<double>>>> make_new_pop(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, double Pc, double Pm, parameter para, random_Q r)
         {
