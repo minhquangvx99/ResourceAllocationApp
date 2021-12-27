@@ -273,7 +273,7 @@ namespace ResourceAllocationApp.algorithm
                     }
                     return arr;
                 }
-                sortedIndices = quicksort_increase(sortedIndices, 0, pop_size);
+                sortedIndices = quicksort_increase(sortedIndices, 0, pop_size-1);
 
                 distance[sortedIndices[0]] += INFINITY;
                 distance[sortedIndices[pop_size - 1]] += INFINITY;
@@ -325,7 +325,7 @@ namespace ResourceAllocationApp.algorithm
                 }
                 return arr;
             }
-            sortedIndices = quicksort_decrease(sortedIndices, 0, pop_size);
+            sortedIndices = quicksort_decrease(sortedIndices, 0, pop_size-1);
             return sortedIndices;
         }
         public List<Tuple<individual, Tuple<List<double>, List<double>>>> make_new_pop(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, double Pc, double Pm, parameter para, random_Q r)
