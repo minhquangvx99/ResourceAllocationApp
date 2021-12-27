@@ -54,7 +54,6 @@ namespace ResourceAllocationApp.utils
             string result;
             int x = populationInfo.Count;
             result = "\r\nPopulation include " + x.ToString() + " element";
-            int ind = 0;
             int numObj = 3;
             List<double> s = new List<double>();
             for (int i=0;i< numObj; i++)
@@ -71,7 +70,6 @@ namespace ResourceAllocationApp.utils
                 }
                 individual ele = populationInfo[i].Item1;
                 List<double> ob_constr = populationInfo[i].Item2.Item1;
-                ind += 1;
                 for (int m = 0; m < ele.t_machine_assign.Count; m++)
                 {
                     string temp = Convert.ToString(ele.t_machine_assign[m], 2);
