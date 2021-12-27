@@ -113,7 +113,6 @@ namespace ResourceAllocationApp.screen
             this.textResult.Location = new System.Drawing.Point(180, 51);
             this.textResult.Multiline = true;
             this.textResult.Name = "textResult";
-            this.textResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textResult.Size = new System.Drawing.Size(593, 107);
             this.textResult.TabIndex = 6;
             // 
