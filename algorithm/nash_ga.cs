@@ -109,7 +109,7 @@ namespace ResourceAllocationApp.algorithm
                     var tuple_S_res = new Tuple<individual, Tuple<List<double>, List<double>>>((child_ind_res), (obj.objectives_constraints(child_ind_res, para)));
                     List<double> rs = tuple_S_res.Item2.Item1;
                     List<double> max = tuple_S_max.Item2.Item1;
-                    if (rs[0] >= max[0] && rs[1] >= max[1] && rs[2] >= max[2])
+                    if (rs[0] <= max[0] && rs[1] <= max[1] && rs[2] <= max[2])
                     {
                         if (!(rs[0] == max[0] && rs[1] == max[1] && rs[2] == max[2]))
                         {

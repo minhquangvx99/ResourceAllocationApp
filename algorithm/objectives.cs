@@ -359,9 +359,9 @@ namespace ResourceAllocationApp.algorithm
         public Tuple<List<double>, List<double>> objectives_constraints(individual ind, parameter para)
         {
             List<double> obj = new List<double>();
-            obj.Add(-f_duration(ind, para));
-            obj.Add(-f_assignment(ind, para));
-            obj.Add(-f_cost(ind, para));
+            obj.Add(f_duration(ind, para));
+            obj.Add(f_assignment(ind, para));
+            obj.Add(f_cost(ind, para));
             List<double> constraints = new List<double>();
             var tuple = new Tuple<List<double>, List<double>>(obj, constraints);
             return tuple;
