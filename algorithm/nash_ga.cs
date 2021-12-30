@@ -38,13 +38,13 @@ namespace ResourceAllocationApp.algorithm
             individual child_ind_max = new individual();
             child_ind_max.set(S_h, S_m);
             var tuple_S_max = new Tuple<individual, Tuple<List<double>, List<double>>>((child_ind_max), (obj.objectives_constraints(child_ind_max, para)));
-            Tuple<int[,], int[,], int[]> hm = Selection(population_info, para, r, pop_size, min);
+            Tuple<int[,], int[,], int[]> hm = selection(population_info, para, r, pop_size, min);
             while (true)
             {
                 int check = 1;
                 findNash(hm, para, ref S_h, ref S_m, ref check, ref tuple_S_max);
                 population_info = make_new_pop(population_info, Pc, Pm, para, r);
-                hm = Selection(population_info, para, r, pop_size, min);
+                hm = selection(population_info, para, r, pop_size, min);
                 if (check == 1)
                 {
                     break;
@@ -52,7 +52,7 @@ namespace ResourceAllocationApp.algorithm
             }
             return tuple_S_max;
         }
-        public Tuple<int[,], int[,], int[]> Selection(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, parameter para, random_Q r, int pop_size, double[,] min)
+        public Tuple<int[,], int[,], int[]> selection(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, parameter para, random_Q r, int pop_size, double[,] min)
         {
             List<individual> ind = new List<individual>();
             pop_size = population_info.Count;
