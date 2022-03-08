@@ -289,7 +289,7 @@ namespace ResourceAllocationApp.screen
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(124, 39);
             this.label11.TabIndex = 34;
-            this.label11.Text = "officers salary: VD: 120";
+            this.label11.Text = "officers salary (USD): VD: 120";
             // 
             // label12
             // 
@@ -299,7 +299,7 @@ namespace ResourceAllocationApp.screen
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(124, 39);
             this.label12.TabIndex = 35;
-            this.label12.Text = "workers salary: VD: 40";
+            this.label12.Text = "workers salary (USD): VD: 40";
             // 
             // textOfficersSalary
             // 
