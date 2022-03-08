@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ResourceAllocationApp.daos;
 using ResourceAllocationApp.utils;
 using ResourceAllocationApp.screen;
-using System.Collections;
+using System.IO;
 
 namespace ResourceAllocationApp.algorithm
 {
@@ -39,18 +39,51 @@ namespace ResourceAllocationApp.algorithm
             child_ind_max.set(S_h, S_m);
             var tuple_S_max = new Tuple<individual, Tuple<List<double>, List<double>>>((child_ind_max), (obj.objectives_constraints(child_ind_max, para)));
             Tuple<int[,], int[,], int[]> hm = selection(population_info, para, r, pop_size, min);
+            int q = 1;
             while (true)
             {
                 int check = 1;
+                //write solution log to file Log.txt
+                solutionLog(tuple_S_max, para, q);
+                q++;
                 findNash(hm, para, ref S_h, ref S_m, ref check, ref tuple_S_max);
-                population_info = make_new_pop(population_info, Pc, Pm, para, r);
-                hm = selection(population_info, para, r, pop_size, min);
                 if (check == 1)
                 {
                     break;
                 }
+                population_info = make_new_pop(population_info, Pc, Pm, para, r);
+                hm = selection(population_info, para, r, pop_size, min);
             }
+            solutionLog(tuple_S_max, para, q);
             return tuple_S_max;
+        }
+        public void solutionLog(Tuple<individual, Tuple<List<double>, List<double>>> tuple_S_max, parameter para, int q)
+        {
+            common cm = new common();
+            Tuple<string, List<string[]>> tuple = cm.printPop(tuple_S_max, para.humans, para.machines);
+            var filename = "Log.txt";
+            string projectDirectory = Directory.GetParent("ResourceAllocationApp").Parent.FullName;
+            string path = projectDirectory.Remove(projectDirectory.Count() - 4, 4) + "/data";
+            //string path = projectDirectory + "/ResourceAllocationApp_Nash-GA Setup/data";
+            Console.WriteLine(path);
+            var fullpath = Path.Combine(path, filename);
+            List<string[]> solution = new List<string[]>();
+            solution = tuple.Item2;
+            string solution_i = "Thế hệ: " + q.ToString() + "\n";
+            solution_i += tuple.Item1 +"\n";
+            string[] temp = solution[0];
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (i < para.machines)
+                {
+                    solution_i += "Machine " + (i + 1).ToString() + ": " + temp[i] + "\n";
+                }
+                else
+                {
+                    solution_i += "Labor " + (i - para.machines + 1).ToString() + ": " + temp[i] + "\n";
+                }
+            }
+            File.AppendAllText(fullpath, solution_i);
         }
         public Tuple<int[,], int[,], int[]> selection(List<Tuple<individual, Tuple<List<double>, List<double>>>> population_info, parameter para, random_Q r, int pop_size, double[,] min)
         {

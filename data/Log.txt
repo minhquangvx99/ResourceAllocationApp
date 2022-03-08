@@ -1,0 +1,72 @@
+Thế hệ: 1
+Values:[
+56,
+5.52450549450549,
+8420.34285714286
+]
+Machine 1: 1, 2, 3, 7, 8, 9, 12, 13, 14, 18, 
+Machine 2: 
+Machine 3: 4, 10, 15, 16, 
+Machine 4: 5, 
+Machine 5: 19, 
+Labor 1: 7, 8, 9, 12, 
+Labor 2: 1, 2, 3, 13, 14, 18, 
+Labor 3: 4, 5, 19, 
+Labor 4: 
+Labor 5: 11, 
+Labor 6: 6, 10, 15, 16, 17, 
+Labor 7: 
+Thế hệ: 2
+Values:[
+24,
+1.70054945054945,
+8420.34285714286
+]
+Machine 1: 1, 2, 3, 7, 8, 9, 12, 13, 14, 18, 
+Machine 2: 
+Machine 3: 4, 10, 15, 16, 
+Machine 4: 5, 
+Machine 5: 19, 
+Labor 1: 1, 7, 8, 9, 12, 
+Labor 2: 2, 3, 13, 14, 18, 
+Labor 3: 19, 
+Labor 4: 
+Labor 5: 16, 
+Labor 6: 17, 
+Labor 7: 4, 5, 6, 10, 11, 15, 
+Thế hệ: 3
+Values:[
+24,
+1.69186813186813,
+8420.34285714286
+]
+Machine 1: 1, 2, 3, 7, 8, 9, 12, 13, 14, 18, 
+Machine 2: 
+Machine 3: 4, 10, 15, 16, 
+Machine 4: 5, 
+Machine 5: 19, 
+Labor 1: 1, 7, 8, 9, 12, 
+Labor 2: 2, 3, 13, 14, 18, 
+Labor 3: 19, 
+Labor 4: 10, 
+Labor 5: 16, 
+Labor 6: 17, 
+Labor 7: 4, 5, 6, 11, 15, 
+Thế hệ: 4
+Values:[
+24,
+1.69186813186813,
+8420.34285714286
+]
+Machine 1: 1, 2, 3, 7, 8, 9, 12, 13, 14, 18, 
+Machine 2: 
+Machine 3: 4, 10, 15, 16, 
+Machine 4: 5, 
+Machine 5: 19, 
+Labor 1: 1, 7, 8, 9, 12, 
+Labor 2: 2, 3, 13, 14, 18, 
+Labor 3: 19, 
+Labor 4: 10, 
+Labor 5: 16, 
+Labor 6: 17, 
+Labor 7: 4, 5, 6, 11, 15, 
